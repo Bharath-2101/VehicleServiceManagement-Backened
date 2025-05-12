@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aits.Safe.Locker.DTO.CustomerDTO;
 import com.aits.Safe.Locker.entity.Customer;
 import com.aits.Safe.Locker.service.CustomerService;
 
@@ -24,7 +25,7 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/admin/allCustomers")
-	public List<Customer> allCustomers()
+	public List<CustomerDTO> allCustomers()
 	{
 		return customerService.getAllCustomers();
 	}

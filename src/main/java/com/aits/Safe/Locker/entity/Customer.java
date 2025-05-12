@@ -17,7 +17,6 @@ public class Customer {
     private String mobile;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private List<Vehicle> vehicles;
 
     public Customer() {}

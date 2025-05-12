@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aits.Safe.Locker.DTO.UserDTO;
 import com.aits.Safe.Locker.entity.User;
 import com.aits.Safe.Locker.service.UserService;
 
@@ -24,13 +25,13 @@ public class UserController {
 	}
 	
 	@GetMapping("/admin/allUsers")
-	public List<User> allUsers()
+	public List<UserDTO> allUsers()
 	{
 		return userService.getAllUsers();
 	}
 	
 	@GetMapping("/admin/allServiceAdvisors")
-	public List<User> allServiceAdvisors()
+	public List<UserDTO> allServiceAdvisors()
 	{
 		return userService.getAllServiceAdvisors();
 	}

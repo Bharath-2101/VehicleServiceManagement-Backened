@@ -1,11 +1,14 @@
 package com.aits.Safe.Locker.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aits.Safe.Locker.DTO.VehicleDTO;
 import com.aits.Safe.Locker.entity.Customer;
 import com.aits.Safe.Locker.entity.Vehicle;
 import com.aits.Safe.Locker.repo.CustomerRepository;
@@ -51,5 +54,27 @@ public class VehicleService {
 		vehicleRepository.save(vehicle);
 		return "Vehicle's Service dates are updated";
 	}
+	
+	public List<VehicleDTO> getVehiclesDueThisWeek() {
+        LocalDate today = LocalDate.now();
+        LocalDate endOfWeek = today.plusDays(7);
+        List<Vehicle> dueVehicles= vehicleRepository.findByNextServiceDateBetween(today, endOfWeek);
+        
+        List<VehicleDTO> modifiedDueVehicles=new ArrayList<>();
+        
+        for(Vehicle vehicle:dueVehicles)
+        {
+        	VehicleDTO modifiedDueVehicle=new VehicleDTO();
+        	modifiedDueVehicle.setModel(vehicle.getModel());
+        	modifiedDueVehicle.setRegistrationNumber(vehicle.getRegistrationNumber());
+        	modifiedDueVehicle.setYear(vehicle.getYear());
+        	modifiedDueVehicle.setFuel(vehicle.getFuel());
+        	modifiedDueVehicle.setType(vehicle.getType());
+        	modifiedDueVehicle.setLastServiceDate(vehicle.getLastServiceDate());
+        	modifiedDueVehicle.setNextServiceDate(vehicle.getNextServiceDate());
+        	modifiedDueVehicles.add(modifiedDueVehicle);
+        }
+        return modifiedDueVehicles;
+    }
 
 }

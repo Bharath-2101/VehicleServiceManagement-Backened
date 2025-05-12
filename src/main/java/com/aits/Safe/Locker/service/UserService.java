@@ -1,11 +1,13 @@
 package com.aits.Safe.Locker.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aits.Safe.Locker.DTO.UserDTO;
 import com.aits.Safe.Locker.entity.User;
 import com.aits.Safe.Locker.entity.User.Role;
 import com.aits.Safe.Locker.repo.UserRepository;
@@ -29,13 +31,35 @@ public class UserService {
 		return "User added Successfully";
 	}
 
-	public List<User> getAllUsers()
-	{
-		return userRepository.findAll();
+	public List<UserDTO> getAllUsers() {
+	    List<User> users = userRepository.findAll();
+	    List<UserDTO> modifiedUsers = new ArrayList<>();
+	    for (User user : users) {
+	        UserDTO modifiedUser = new UserDTO();
+	        modifiedUser.setName(user.getName());
+	        modifiedUser.setMobile(user.getMobile());
+	        modifiedUser.setEmail(user.getEmail());
+	        modifiedUser.setRole(user.getRole());
+	        modifiedUser.setCreatedAt(user.getCreatedAt());
+	        modifiedUsers.add(modifiedUser);
+	    }
+	    return modifiedUsers;
 	}
+
 	
-	public List<User> getAllServiceAdvisors()
+	public List<UserDTO> getAllServiceAdvisors()
 	{
-		return userRepository.findByRole(Role.SERVICE_ADVISOR);
+		List<User> users=userRepository.findByRole(Role.SERVICE_ADVISOR);
+		List<UserDTO> modifiedUsers = new ArrayList<>();
+	    for (User user : users) {
+	        UserDTO modifiedUser = new UserDTO();
+	        modifiedUser.setName(user.getName());
+	        modifiedUser.setMobile(user.getMobile());
+	        modifiedUser.setEmail(user.getEmail());
+	        modifiedUser.setRole(user.getRole());
+	        modifiedUser.setCreatedAt(user.getCreatedAt());
+	        modifiedUsers.add(modifiedUser);
+	    }
+	    return modifiedUsers;
 	}
 }
