@@ -14,7 +14,6 @@ public class VehicleDTO {
 	    private LocalDate nextServiceDate;
 	    private Type type;
 	    private Fuel fuel;
-	    private CustomerDTO customer;
 		public String getModel() {
 			return model;
 		}
