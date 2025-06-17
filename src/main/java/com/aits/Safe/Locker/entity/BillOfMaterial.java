@@ -11,8 +11,8 @@ public class BillOfMaterial {
 
     private int quantity;
 
-    @OneToOne
-    @JoinColumn(name = "work_item_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "work_item_id")
     private WorkItem workItem;
 
     @ManyToOne

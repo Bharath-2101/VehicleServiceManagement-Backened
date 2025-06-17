@@ -3,6 +3,8 @@ package com.aits.Safe.Locker.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -26,6 +28,7 @@ public class User {
 	private Role role;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnore
 	private List<ServiceRecord> serviceRecords;
 	
 	
